@@ -37,7 +37,7 @@ reg = c['name']
 try:
     usa = requests.get(f'https://api.vatusa.net/v2/user/{CID}').json()
     zhu = requests.get(f'https://api.zhuartcc.org/api/users/{CID}').json()
-    cert_list = ["No Certification", "Minor Certification", "Major Certification", "Solo Certification"]
+    zhu_cert_list = ["No Certification", "Minor Certification", "Major Certification", "Solo Certification"]
     name = usa['data']['fname']
     lname = usa['data']['lname']
     del_cert = zhu['del_cert']
@@ -55,12 +55,12 @@ try:
         print(f'Subdivision: {sub}')
     elif facility == 'ZHU':
         print(f'Subdivision: {facility}')
-        print(f'DEL Cert: {cert_list[del_cert]}')
-        print(f'GND Cert: {cert_list[gnd_cert]}')
-        print(f'TWR Cert: {cert_list[twr_cert]}')
-        print(f'APP Cert: {cert_list[app_cert]}')
-        print(f'CTR Cert: {cert_list[ctr_cert]}')
-        print(f'OCN Cert: {cert_list[ocn_cert]}')
+        print(f'DEL Cert: {zhu_cert_list[del_cert]}')
+        print(f'GND Cert: {zhu_cert_list[gnd_cert]}')
+        print(f'TWR Cert: {zhu_cert_list[twr_cert]}')
+        print(f'APP Cert: {zhu_cert_list[app_cert]}')
+        print(f'CTR Cert: {zhu_cert_list[ctr_cert]}')
+        print(f'OCN Cert: {zhu_cert_list[ocn_cert]}')
     elif division == "USA":
         print(f'Subdivision: {facility}')
     else:
