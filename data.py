@@ -27,56 +27,78 @@ atc = y['atc']
 if division != "BRZ" and division != "CAM" and division != "GBR" and division != "IL" and division != "JPN" and division != "KOR" and division != "PAC" and division != "PRC" and division != "MCO" and division != "NZ" and division != "ROC" and division != "RUS" and division != "USA" and division != "SSA":
     a = requests.get(f'https://api.vatsim.net/api/subdivisions/{subdivision}/').json()
     sub = a['fullname']
-
-
 b = requests.get(f'https://api.vatsim.net/api/divisions/{division}/').json()
 c = requests.get(f'https://api.vatsim.net/api/regions/{region}/').json()
 div = b['name']
 reg = c['name']
 
+
+
 try:
     usa = requests.get(f'https://api.vatusa.net/v2/user/{CID}').json()
-    zhu = requests.get(f'https://api.zhuartcc.org/api/users/{CID}').json()
-    zhu_cert_list = ["No Certification", "Minor Certification", "Major Certification", "Solo Certification"]
-    name = usa['data']['fname']
-    lname = usa['data']['lname']
-    del_cert = zhu['del_cert']
-    gnd_cert = zhu['gnd_cert']
-    twr_cert = zhu['twr_cert']
-    app_cert = zhu['app_cert']
-    ctr_cert = zhu['ctr_cert']
-    ocn_cert = zhu['ocn_cert']
 
-    print(f"{name} {lname} ({CID}) has a rating of {rating_list[rat]}")
-    print(f'Region: {reg}')
-    print(f'Division: {div}')
-    facility = usa['data']['facility']
-    if division != "BRZ" and division != "CAM" and division != "GBR" and division != "IL" and division != "JPN" and division != "KOR" and division != "PAC" and division != "PRC" and division != "MCO" and division != "NZ" and division != "ROC" and division != "RUS" and division != "USA" and division != "SSA":
-        print(f'Subdivision: {sub}')
-    elif facility == 'ZHU':
-        print(f'Subdivision: {facility}')
-        print(f'DEL Cert: {zhu_cert_list[del_cert]}')
-        print(f'GND Cert: {zhu_cert_list[gnd_cert]}')
-        print(f'TWR Cert: {zhu_cert_list[twr_cert]}')
-        print(f'APP Cert: {zhu_cert_list[app_cert]}')
-        print(f'CTR Cert: {zhu_cert_list[ctr_cert]}')
-        print(f'OCN Cert: {zhu_cert_list[ocn_cert]}')
-    elif division == "USA":
-        print(f'Subdivision: {facility}')
-    else:
-        print('Subdivision: None')
-    print(f'ATC: {atc}')
-    print(f'S1: {s1}')
-    print(f'S2: {s2}')
-    print(f'S3: {s3}')
-    print(f'C1: {c1}')
-    print(f'C2: {c2}')
-    print(f'C3: {c3}')
-    print(f'I1: {i1}')
-    print(f'I2: {i2}')
-    print(f'I3: {i3}')
-    print(f'SUP: {sup}')
-    print(f'ADM: {adm}')
+    try:
+        zhu = requests.get(f'https://api.zhuartcc.org/api/users/{CID}').json()
+
+        cert_list = ["No Certification", "Minor Certification", "Major Certification", "Solo Certification"]
+        name = usa['data']['fname']
+        lname = usa['data']['lname']
+        del_cert = zhu['del_cert']
+        gnd_cert = zhu['gnd_cert']
+        twr_cert = zhu['twr_cert']
+        app_cert = zhu['app_cert']
+        ctr_cert = zhu['ctr_cert']
+        ocn_cert = zhu['ocn_cert']
+
+        print(f"{name} {lname} ({CID}) has a rating of {rating_list[rat]}")
+        print(f'Region: {reg}')
+        print(f'Division: {div}')
+        facility = usa['data']['facility']
+        print(f'Facility: {facility}')
+        print(f'DEL Cert: {cert_list[del_cert]}')
+        print(f'GND Cert: {cert_list[gnd_cert]}')
+        print(f'TWR Cert: {cert_list[twr_cert]}')
+        print(f'APP Cert: {cert_list[app_cert]}')
+        print(f'CTR Cert: {cert_list[ctr_cert]}')
+        print(f'OCN Cert: {cert_list[ocn_cert]}')
+        print(f'ATC: {atc}')
+        print(f'S1: {s1}')
+        print(f'S2: {s2}')
+        print(f'S3: {s3}')
+        print(f'C1: {c1}')
+        print(f'C2: {c2}')
+        print(f'C3: {c3}')
+        print(f'I1: {i1}')
+        print(f'I2: {i2}')
+        print(f'I3: {i3}')
+        print(f'SUP: {sup}')
+        print(f'ADM: {adm}')
+
+    except:
+
+        name = usa['data']['fname']
+        lname = usa['data']['lname']
+    
+        print(f"{name} {lname} ({CID}) has a rating of {rating_list[rat]}")
+        print(f'Region: {reg}')
+        print(f'Division: {div}')
+        if division == 'USA':
+            facility = usa['data']['facility']
+            print(f'Facility: {facility}')
+        else:
+            print(f'Subdivision: {sub}')
+        print(f'ATC: {atc}')
+        print(f'S1: {s1}')
+        print(f'S2: {s2}')
+        print(f'S3: {s3}')
+        print(f'C1: {c1}')
+        print(f'C2: {c2}')
+        print(f'C3: {c3}')
+        print(f'I1: {i1}')
+        print(f'I2: {i2}')
+        print(f'I3: {i3}')
+        print(f'SUP: {sup}')
+        print(f'ADM: {adm}')
 
 except:
 
@@ -87,15 +109,15 @@ except:
         print(f'Subdivision: {sub}')
     else:
         print('Subdivision: None')
-    print(f'ATC: {atc}')
-    print(f'S1: {s1}')
-    print(f'S2: {s2}')
-    print(f'S3: {s3}')
-    print(f'C1: {c1}')
-    print(f'C2: {c2}')
-    print(f'C3: {c3}')
-    print(f'I1: {i1}')
-    print(f'I2: {i2}')
-    print(f'I3: {i3}')
-    print(f'SUP: {sup}')
-    print(f'ADM: {adm}')
+        print(f'ATC: {atc}')
+        print(f'S1: {s1}')
+        print(f'S2: {s2}')
+        print(f'S3: {s3}')
+        print(f'C1: {c1}')
+        print(f'C2: {c2}')
+        print(f'C3: {c3}')
+        print(f'I1: {i1}')
+        print(f'I2: {i2}')
+        print(f'I3: {i3}')
+        print(f'SUP: {sup}')
+        print(f'ADM: {adm}')
