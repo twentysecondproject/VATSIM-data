@@ -20,6 +20,7 @@ vACC/Division/Region website developers, if you have an online API to get more u
 
 ### To be implemented:
 
+`No implemenattions pending`
 
 
 If you want to submit your API open a Pull Request and add yours in 'to be implemented'.
