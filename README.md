@@ -2,7 +2,7 @@
 
 To show user data with given CID. You just need to have Python installed. Double Click on the data.py and follow the instructions.
 
-vACC/Division/Region website developers, if you have an online API to get more user data like certifications or other things (not personal like Email or Age). If you would like to share I would love that!
+vACC/Division/Region website developers, if you have an online API to get more user data like certifications or other things (not personal like Email or Age) please share them, I would love to implement them!
 
 
 
