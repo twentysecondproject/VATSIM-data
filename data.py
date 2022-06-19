@@ -21,13 +21,14 @@ def get_user_data():
 
     x = requests.get(f'https://api.vatsim.net/api/ratings/{CID}').json()
     y = requests.get(f'https://api.vatsim.net/api/ratings/{CID}/rating_times/').json()
-
     cid = CID
-    rating_list = ["Inactive or Suspended", "OBS", "S1", "S2", "S3", "C1", "C2", "C3", "I1", "I2", "I3", "SUP", "ADM"]
+    #dat = x['reg_date']
+    #date = dat.strftime('%d/%m/%Y')
+    rating_list = ["Unknown", "OBS", "S1", "S2", "S3", "C1", "C2", "C3", "I1", "I2", "I3", "SUP", "ADM"]
     rat = x['rating']
     region = x['region']
     division = x['division']
-    subdivision = x['subdivision']
+    subdiv = x['subdivision']
     s1 = y['s1']
     s2 = y['s2']
     s3 = y['s3']
@@ -41,10 +42,10 @@ def get_user_data():
     adm = y['adm']
     atc = y['atc']
 
-
-    if len(subdivision) != 0:       
-        a = requests.get(f'https://api.vatsim.net/api/subdivisions/{subdivision}').json()
+    if len(subdiv) - subdiv.count(' ') != 0:       
+        a = requests.get(f'https://api.vatsim.net/api/subdivisions/{subdiv}').json()
         sub = a['fullname']
+    
     b = requests.get(f'https://api.vatsim.net/api/divisions/{division}/').json()
     c = requests.get(f'https://api.vatsim.net/api/regions/{region}/').json()
     div = b['name']
@@ -55,21 +56,20 @@ def get_user_data():
     try:
         usa = requests.get(f'https://api.vatusa.net/v2/user/{CID}').json()
         facility = usa['data']['facility']
-
+        name = usa['data']['fname']
+        lname = usa['data']['lname']
         if facility == "ZHU":
             zhu = requests.get(f'https://api.zhuartcc.org/api/users/{CID}').json()
-
             cert_list = ["No Certification", "Minor Certification", "Major Certification", "Solo Certification"]
-            name = usa['data']['fname']
-            lname = usa['data']['lname']
             del_cert = zhu['del_cert']
             gnd_cert = zhu['gnd_cert']
             twr_cert = zhu['twr_cert']
             app_cert = zhu['app_cert']
             ctr_cert = zhu['ctr_cert']
             ocn_cert = zhu['ocn_cert']
-
+            print('4')
             print(f"{name} {lname} ({CID}) has a rating of {rating_list[rat]}")
+            #print(f'Registartion date (Day/Month/Year): {date}')
             print(f'Region: {reg}')
             print(f'Division: {div}')
             print(f'Facility: Houston ARTCC (ZHU)')
@@ -96,14 +96,13 @@ def get_user_data():
         elif facility == "ZJX":
                 zjx = requests.get(f'https://zjxartcc.org/api/user/{CID}').json()
                 cert_list = ["No Certification", "Minor Certification", "Major Certification", "Minor Solo Certification", "Major Solo Certification", 'Checkout Required', 'Training Request Recived', 'Training Request Recived']
-                name = usa['data']['fname']
-                lname = usa['data']['lname']
                 del_cert = zjx['del_cert']
                 gnd_cert = zjx['gnd_cert']
                 twr_cert = zjx['twr_cert']
                 app_cert = zjx['app_cert']
                 ctr_cert = zjx['ctr_cert']
                 print(f"{name} {lname} ({CID}) has a rating of {rating_list[rat]}")
+                #print(f'Registartion date (Day/Month/Year): {date}')
                 print(f'Region: {reg}')
                 print(f'Division: {div}')
                 print(f'Facility: Jacksonville ARTCC (ZJX)')
@@ -126,15 +125,13 @@ def get_user_data():
                 print(f'ADM: {adm}')
                 ask_for_exit()
         else:
-                name = usa['data']['fname']
-                lname = usa['data']['lname']
-
                 print(f"{name} {lname} ({CID}) has a rating of {rating_list[rat]}")
+                #print(f'Registartion date (Day/Month/Year): {date}')
                 print(f'Region: {reg}')
                 print(f'Division: {div}')
                 if division == 'USA':
                     print(f'Facility: {facility}')
-                elif len(subdivision) == 0:
+                elif len(subdiv) - subdiv.count(' ') == 0:
                     print(f'Subdivision: None')
                 else:
                     print(f'Subdivision: {sub}')
@@ -155,9 +152,10 @@ def get_user_data():
     except:
 
         print(f"{cid} has a rating of {rating_list[rat]}")
+        #print(f'Registartion date (Day/Month/Year): {date}')
         print(f'Region: {reg}')
         print(f'Division: {div}')
-        if len(subdivision) == 0:
+        if len(subdiv) - subdiv.count(' ') == 0:
             print(f'Subdivision: None')
         else:
             print(f'Subdivision: {sub}')
