@@ -18,6 +18,7 @@ def get_user_data():
     if codes == 404:
         print('CID not found')
         ask_for_exit()
+
     x = requests.get(f'https://api.vatsim.net/api/ratings/{CID}').json()
     y = requests.get(f'https://api.vatsim.net/api/ratings/{CID}/rating_times/').json()
 
@@ -54,8 +55,9 @@ def get_user_data():
 
     try:
         usa = requests.get(f'https://api.vatusa.net/v2/user/{CID}').json()
+        facility = usa['data']['facility']
 
-        try:
+        if facility == "ZHU":
             zhu = requests.get(f'https://api.zhuartcc.org/api/users/{CID}').json()
 
             cert_list = ["No Certification", "Minor Certification", "Major Certification", "Solo Certification"]
@@ -71,8 +73,7 @@ def get_user_data():
             print(f"{name} {lname} ({CID}) has a rating of {rating_list[rat]}")
             print(f'Region: {reg}')
             print(f'Division: {div}')
-            facility = usa['data']['facility']
-            print(f'Facility: {facility}')
+            print(f'Facility: Houston ARTCC (ZHU)')
             print(f'DEL Cert: {cert_list[del_cert]}')
             print(f'GND Cert: {cert_list[gnd_cert]}')
             print(f'TWR Cert: {cert_list[twr_cert]}')
@@ -93,32 +94,62 @@ def get_user_data():
             print(f'ADM: {adm}')
             ask_for_exit()
 
-        except:
+        elif facility == "ZJX":
+                zjx = requests.get(f'https://zjxartcc.org/api/user/{CID}').json()
+                cert_list = ["No Certification", "Minor Certification", "Major Certification", "Minor Solo Certification", "Major Solo Certification", 'Checkout Required', 'Training Request Recived', 'Training Request Recived']
+                name = usa['data']['fname']
+                lname = usa['data']['lname']
+                del_cert = zjx['del_cert']
+                gnd_cert = zjx['gnd_cert']
+                twr_cert = zjx['twr_cert']
+                app_cert = zjx['app_cert']
+                ctr_cert = zjx['ctr_cert']
+                print(f"{name} {lname} ({CID}) has a rating of {rating_list[rat]}")
+                print(f'Region: {reg}')
+                print(f'Division: {div}')
+                print(f'Facility: Jacksonville ARTCC (ZJX)')
+                print(f'DEL Cert: {cert_list[del_cert]}')
+                print(f'GND Cert: {cert_list[gnd_cert]}')
+                print(f'TWR Cert: {cert_list[twr_cert]}')
+                print(f'APP Cert: {cert_list[app_cert]}')
+                print(f'CTR Cert: {cert_list[ctr_cert]}')
+                print(f'ATC: {atc}')
+                print(f'S1: {s1}')
+                print(f'S2: {s2}')
+                print(f'S3: {s3}')
+                print(f'C1: {c1}')
+                print(f'C2: {c2}')
+                print(f'C3: {c3}')
+                print(f'I1: {i1}')
+                print(f'I2: {i2}')
+                print(f'I3: {i3}')
+                print(f'SUP: {sup}')
+                print(f'ADM: {adm}')
+                ask_for_exit()
+        else:
+                name = usa['data']['fname']
+                lname = usa['data']['lname']
 
-            name = usa['data']['fname']
-            lname = usa['data']['lname']
-
-            print(f"{name} {lname} ({CID}) has a rating of {rating_list[rat]}")
-            print(f'Region: {reg}')
-            print(f'Division: {div}')
-            if division == 'USA':
-                facility = usa['data']['facility']
-                print(f'Facility: {facility}')
-            else:
-                print(f'Subdivision: {sub}')
-            print(f'ATC: {atc}')
-            print(f'S1: {s1}')
-            print(f'S2: {s2}')
-            print(f'S3: {s3}')
-            print(f'C1: {c1}')
-            print(f'C2: {c2}')
-            print(f'C3: {c3}')
-            print(f'I1: {i1}')
-            print(f'I2: {i2}')
-            print(f'I3: {i3}')
-            print(f'SUP: {sup}')
-            print(f'ADM: {adm}')
-            ask_for_exit()
+                print(f"{name} {lname} ({CID}) has a rating of {rating_list[rat]}")
+                print(f'Region: {reg}')
+                print(f'Division: {div}')
+                if division == 'USA':
+                    print(f'Facility: {facility}')
+                else:
+                    print(f'Subdivision: {sub}')
+                print(f'ATC Hours: {atc}')
+                print(f'S1: {s1}')
+                print(f'S2: {s2}')
+                print(f'S3: {s3}')
+                print(f'C1: {c1}')
+                print(f'C2: {c2}')
+                print(f'C3: {c3}')
+                print(f'I1: {i1}')
+                print(f'I2: {i2}')
+                print(f'I3: {i3}')
+                print(f'SUP: {sup}')
+                print(f'ADM: {adm}')
+                ask_for_exit()
 
     except:
 
@@ -145,3 +176,4 @@ def get_user_data():
         
 
 get_user_data()
+
