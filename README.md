@@ -15,6 +15,8 @@ vACC/Division/Region website developers, if you have an online API to get more u
 
 `VATUSA Division API (https://api.vatusa.net)`
 
+`VATSIM API (https://api.vatsim.net/api)`
+
 `Port Au Prince FIR API (https://)`
 
 
