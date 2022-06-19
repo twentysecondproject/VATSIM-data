@@ -7,11 +7,17 @@ def ask_for_exit():
             elif inpot == 'n':
                 exit()
             else:
+                print('Invalid input')
                 ask_for_exit()
 
 
 def get_user_data():
     CID = input('You might want to give me a CID: ')
+    code = requests.get(f'https://api.vatsim.net/api/ratings/{CID}')
+    codes = code.status_code
+    if codes == 404:
+        print('CID not found')
+        ask_for_exit()
     x = requests.get(f'https://api.vatsim.net/api/ratings/{CID}').json()
     y = requests.get(f'https://api.vatsim.net/api/ratings/{CID}/rating_times/').json()
 
