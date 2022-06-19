@@ -42,10 +42,9 @@ def get_user_data():
     atc = y['atc']
 
 
-    if division != "BRZ" and division != "CAM" and division != "GBR" and division != "IL" and division != "JPN" and division != "KOR" and division != "PAC" and division != "PRC" and division != "MCO" and division != "NZ" and division != "ROC" and division != "RUS" and division != "USA" and division != "SSA":
-        a = requests.get(f'https://api.vatsim.net/api/subdivisions/{subdivision}/').json()
+    if len(subdivision) != 0:       
+        a = requests.get(f'https://api.vatsim.net/api/subdivisions/{subdivision}').json()
         sub = a['fullname']
-
     b = requests.get(f'https://api.vatsim.net/api/divisions/{division}/').json()
     c = requests.get(f'https://api.vatsim.net/api/regions/{region}/').json()
     div = b['name']
@@ -135,6 +134,8 @@ def get_user_data():
                 print(f'Division: {div}')
                 if division == 'USA':
                     print(f'Facility: {facility}')
+                elif len(subdivision) == 0:
+                    print(f'Subdivision: None')
                 else:
                     print(f'Subdivision: {sub}')
                 print(f'ATC Hours: {atc}')
@@ -156,24 +157,23 @@ def get_user_data():
         print(f"{cid} has a rating of {rating_list[rat]}")
         print(f'Region: {reg}')
         print(f'Division: {div}')
-        if division != "BRZ" and division != "CAM" and division != "GBR" and division != "IL" and division != "JPN" and division != "KOR" and division != "PAC" and division != "PRC" and division != "MCO" and division != "NZ" and division != "ROC" and division != "RUS" and division != "USA" and division != "SSA":
-            print(f'Subdivision: {sub}')
+        if len(subdivision) == 0:
+            print(f'Subdivision: None')
         else:
-            print('Subdivision: None')
-            print(f'ATC: {atc}')
-            print(f'S1: {s1}')
-            print(f'S2: {s2}')
-            print(f'S3: {s3}')
-            print(f'C1: {c1}')
-            print(f'C2: {c2}')
-            print(f'C3: {c3}')
-            print(f'I1: {i1}')
-            print(f'I2: {i2}')
-            print(f'I3: {i3}')
-            print(f'SUP: {sup}')
-            print(f'ADM: {adm}')
-            ask_for_exit()
+            print(f'Subdivision: {sub}')
+        print(f'ATC: {atc}')
+        print(f'S1: {s1}')
+        print(f'S2: {s2}')
+        print(f'S3: {s3}')
+        print(f'C1: {c1}')
+        print(f'C2: {c2}')
+        print(f'C3: {c3}')
+        print(f'I1: {i1}')
+        print(f'I2: {i2}')
+        print(f'I3: {i3}')
+        print(f'SUP: {sup}')
+        print(f'ADM: {adm}')
+        ask_for_exit()
         
 
 get_user_data()
-
