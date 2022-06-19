@@ -11,7 +11,7 @@ vACC/Division/Region website developers, if you have an online API to get more u
 
 `ZHU ARTCC API (https://api.zhuartcc.org)`
 
-`ZJX ARTCC API (https.//zjxartcc.org/api)`
+`ZJX ARTCC API (https://zjxartcc.org/api)`
 
 `Port Au Prince FIR API (https://)`
 
@@ -22,7 +22,7 @@ vACC/Division/Region website developers, if you have an online API to get more u
 
 ### To be implemented:
 
-`No implemenattions pending`
+`No implementations pending`
 
 
 If you want to submit your API open a Pull Request and add yours in 'to be implemented'.
