@@ -11,6 +11,8 @@ vACC/Division/Region website developers, if you have an online API to get more u
 
 `ZHU ARTCC API (https://api.zhuartcc.org)`
 
+`ZJX ARTCC API (https.//zjxartcc.org/api)`
+
 `Port Au Prince FIR API (https://)`
 
 
