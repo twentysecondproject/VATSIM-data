@@ -1,7 +1,10 @@
 # VATSIM-data
 
-To show user data with given CID. IT IS NOT FULLY FUNCTIONAL MEANING SOME CIDs MIGHT REURN AN ERROR, on the other side, vACC website developers if you have an online API I can integrate that inside to show more and more information about a user. Like if the home facility is x for example, if I have x's website API I can show certifications or stuff.
+To show user data with given CID. You just need to have Python installed. Double Click on the data.py and follow the instructions.
+
+vACC/Division/Region website developers, if you have an online API to get more user data like certifications or other things (not personal like Email or Age). If you would like to share I would love that!
 
 At the moment implemented:
 
 ZHU ARTCC API (https://api.zhuartcc.org)
+Port Au Prince FIR API (https://)
