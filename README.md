@@ -17,7 +17,6 @@ vACC/Division/Region website developers, if you have an online API to get more u
 
 `VATSIM API (https://api.vatsim.net/api)`
 
-`Port Au Prince FIR API (https://)`
 
 
 
@@ -26,7 +25,7 @@ vACC/Division/Region website developers, if you have an online API to get more u
 
 ### To be implemented:
 
-`No implementations pending`
+`Port Au Prince FIR API (Coming soon with new website)`
 
 
 If you want to submit your API open a Pull Request and add yours in 'to be implemented'.
