@@ -27,15 +27,17 @@ vACC/Division/Region website developers, if you have an online API to get more u
 
 `Port Au Prince FIR API (Coming soon with new website)`
 
+If you want to submit your API open a Pull Request and add yours in 'to be implemented'.
+
 ### What does the script do?
 It is able to return:
 
-User data. (with CID input)
+`User data. (with CID input)`
 
-Metar at an airport. (With ICAO Input)
+`Metar at an airport. (With ICAO Input)`
 
-Online controllers at an airport. (With ICAO (IATA if in the US) input)
+`Online controllers at an airport. (With ICAO (IATA if in the US) input)`
 
 
 
-If you want to submit your API open a Pull Request and add yours in 'to be implemented'.
+
