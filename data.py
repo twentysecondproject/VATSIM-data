@@ -25,6 +25,7 @@ def ask_for_options():
 
 
 def ask_for_exit():
+            print()
             inpot = input('Do you want to continue? (y/n): ')
             if inpot == 'y':
                 ask_for_options()
@@ -95,7 +96,7 @@ def get_user_data():
             app_cert = zhu['app_cert']
             ctr_cert = zhu['ctr_cert']
             ocn_cert = zhu['ocn_cert']
-            print('4')
+            print()
             print(f"{name} {lname} ({CID}) has a rating of {rating_list[rat]}")
             print(f'Registartion date (Day/Month/Year): {date}')
             print(f'Region: {reg}')
@@ -129,6 +130,7 @@ def get_user_data():
                 twr_cert = zjx['twr_cert']
                 app_cert = zjx['app_cert']
                 ctr_cert = zjx['ctr_cert']
+                print()
                 print(f"{name} {lname} ({CID}) has a rating of {rating_list[rat]}")
                 print(f'Registartion date (Day/Month/Year): {date}')
                 print(f'Region: {reg}')
@@ -154,6 +156,7 @@ def get_user_data():
                 ask_for_exit()
 
         else:
+                print()
                 print(f"{name} {lname} ({CID}) has a rating of {rating_list[rat]}")
                 print(f'Registartion date (Day/Month/Year): {date}')
                 print(f'Region: {reg}')
@@ -179,6 +182,7 @@ def get_user_data():
                 ask_for_exit()
 
     except:
+        print()
         print(f"{cid} has a rating of {rating_list[rat]}")
         print(f'Registartion date (Day/Month/Year): {date}')
         print(f'Region: {reg}')
@@ -202,6 +206,7 @@ def get_user_data():
         ask_for_exit()
         
 def get_metar_data():
+    print()
     icao = input("Enter ICAO for Metar: ")
     req = requests.get(f"https://metar.vatsim.net/{icao}")
     resp = req.text
@@ -210,6 +215,7 @@ def get_metar_data():
 
 
 def get_controllers():
+    print()
     icao = input("Enter the ICAO (IATA if in the United States) to get the online controllers: ")
     json = requests.get('https://data.vatsim.net/v3/vatsim-data.json').json()
     controllers = json['controllers']
@@ -219,6 +225,7 @@ def get_controllers():
     ask_for_exit()
 
 def get_pilot():
+    print()
     callsign = input("Enter the callsign of the pilot: ")
     json = requests.get('https://data.vatsim.net/v3/vatsim-data.json').json()
     pilots = json['pilots']
@@ -239,5 +246,5 @@ def get_pilot():
             print(f'Airplane: {airplane}')
             print(f'Route: {route}')
 
-
+print('Created with love by Filippo Genoni')
 ask_for_options()
