@@ -4,13 +4,16 @@ from datetime import datetime
 def ask_for_options():
     print('1. Get user data')
     print('2. Get metar data')
-    print('3. Exit')
+    print('3. Get controllers at an airport (will return all the stations online at the airport, might not return CTRs')
+    print('4. Exit')
     inpot = input('What do you want to do? (1/2/3): ')
     if inpot == '1':
         get_user_data()
     elif inpot == '2':
         get_metar_data()
     elif inpot == '3':
+        get_controllers()
+    elif inpot == '4':
         exit()
     else:
         print('Invalid input')
@@ -199,6 +202,16 @@ def get_metar_data():
     req = requests.get(f"https://metar.vatsim.net/{icao}")
     resp = req.text
     print(resp)
+    ask_for_exit()
+
+
+def get_controllers():
+    icao = input("Enter the ICAO (IATA if in the United States) to get the online controllers: ")
+    json = requests.get('https://data.vatsim.net/v3/vatsim-data.json').json()
+    controllers = json['controllers']
+    for controller in controllers:
+        if controller['callsign'][:len(icao)] == icao:
+            print(f"{controller['callsign']} - {controller['name']}")
     ask_for_exit()
 
 
