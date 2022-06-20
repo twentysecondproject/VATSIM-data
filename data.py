@@ -1,9 +1,26 @@
 import requests
+from datetime import datetime
+
+def ask_for_options():
+    print('1. Get user data')
+    print('2. Get metar data')
+    print('3. Exit')
+    inpot = input('What do you want to do? (1/2/3): ')
+    if inpot == '1':
+        get_user_data()
+    elif inpot == '2':
+        get_metar_data()
+    elif inpot == '3':
+        exit()
+    else:
+        print('Invalid input')
+        ask_for_options()
+
 
 def ask_for_exit():
             inpot = input('Do you want to continue? (y/n): ')
             if inpot == 'y':
-                get_user_data()
+                ask_for_options()
             elif inpot == 'n':
                 exit()
             else:
@@ -22,8 +39,9 @@ def get_user_data():
     x = requests.get(f'https://api.vatsim.net/api/ratings/{CID}').json()
     y = requests.get(f'https://api.vatsim.net/api/ratings/{CID}/rating_times/').json()
     cid = CID
-    #dat = x['reg_date']
-    #date = dat.strftime('%d/%m/%Y')
+    da = x['reg_date']
+    dat = datetime.strptime(da, '%Y-%m-%dT%H:%M:%S')
+    date = dat.strftime('%d/%m/%Y')
     rating_list = ["Unknown", "OBS", "S1", "S2", "S3", "C1", "C2", "C3", "I1", "I2", "I3", "SUP", "ADM"]
     rat = x['rating']
     region = x['region']
@@ -54,10 +72,13 @@ def get_user_data():
 
 
     try:
+
         usa = requests.get(f'https://api.vatusa.net/v2/user/{CID}').json()
         facility = usa['data']['facility']
         name = usa['data']['fname']
         lname = usa['data']['lname']
+
+
         if facility == "ZHU":
             zhu = requests.get(f'https://api.zhuartcc.org/api/users/{CID}').json()
             cert_list = ["No Certification", "Minor Certification", "Major Certification", "Solo Certification"]
@@ -69,7 +90,7 @@ def get_user_data():
             ocn_cert = zhu['ocn_cert']
             print('4')
             print(f"{name} {lname} ({CID}) has a rating of {rating_list[rat]}")
-            #print(f'Registartion date (Day/Month/Year): {date}')
+            print(f'Registartion date (Day/Month/Year): {date}')
             print(f'Region: {reg}')
             print(f'Division: {div}')
             print(f'Facility: Houston ARTCC (ZHU)')
@@ -102,7 +123,7 @@ def get_user_data():
                 app_cert = zjx['app_cert']
                 ctr_cert = zjx['ctr_cert']
                 print(f"{name} {lname} ({CID}) has a rating of {rating_list[rat]}")
-                #print(f'Registartion date (Day/Month/Year): {date}')
+                print(f'Registartion date (Day/Month/Year): {date}')
                 print(f'Region: {reg}')
                 print(f'Division: {div}')
                 print(f'Facility: Jacksonville ARTCC (ZJX)')
@@ -124,9 +145,10 @@ def get_user_data():
                 print(f'SUP: {sup}')
                 print(f'ADM: {adm}')
                 ask_for_exit()
+
         else:
                 print(f"{name} {lname} ({CID}) has a rating of {rating_list[rat]}")
-                #print(f'Registartion date (Day/Month/Year): {date}')
+                print(f'Registartion date (Day/Month/Year): {date}')
                 print(f'Region: {reg}')
                 print(f'Division: {div}')
                 if division == 'USA':
@@ -150,9 +172,8 @@ def get_user_data():
                 ask_for_exit()
 
     except:
-
         print(f"{cid} has a rating of {rating_list[rat]}")
-        #print(f'Registartion date (Day/Month/Year): {date}')
+        print(f'Registartion date (Day/Month/Year): {date}')
         print(f'Region: {reg}')
         print(f'Division: {div}')
         if len(subdiv) - subdiv.count(' ') == 0:
@@ -173,5 +194,12 @@ def get_user_data():
         print(f'ADM: {adm}')
         ask_for_exit()
         
+def get_metar_data():
+    icao = input("Enter ICAO for Metar: ")
+    req = requests.get(f"https://metar.vatsim.net/{icao}")
+    resp = req.text
+    print(resp)
+    ask_for_exit()
 
-get_user_data()
+
+ask_for_options()
