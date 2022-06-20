@@ -2,11 +2,13 @@ import requests
 from datetime import datetime
 
 def ask_for_options():
+    print()
     print('1. Get user data')
     print('2. Get metar data')
     print('3. Get controllers at an airport (will return all the stations online at the airport, might not return CTRs')
-    print('4. Exit')
-    inpot = input('What do you want to do? (1/2/3): ')
+    print('4. Get callsign data')
+    print('5. Exit')
+    inpot = input('What do you want to do? (1/2/3/4/5): ')
     if inpot == '1':
         get_user_data()
     elif inpot == '2':
@@ -14,6 +16,8 @@ def ask_for_options():
     elif inpot == '3':
         get_controllers()
     elif inpot == '4':
+        get_pilot()
+    elif inpot == '5':
         exit()
     else:
         print('Invalid input')
@@ -213,6 +217,27 @@ def get_controllers():
         if controller['callsign'][:len(icao)] == icao:
             print(f"{controller['callsign']} - {controller['name']}")
     ask_for_exit()
+
+def get_pilot():
+    callsign = input("Enter the callsign of the pilot: ")
+    json = requests.get('https://data.vatsim.net/v3/vatsim-data.json').json()
+    pilots = json['pilots']
+    for pilot in pilots:
+        if pilot['callsign'] == callsign:
+            flight_plan = pilot['flight_plan']
+            flight_rule =flight_plan['flight_rules']
+            route = flight_plan['route']
+            airplane = flight_plan['aircraft_short']
+            departure = flight_plan['departure']
+            arrival = flight_plan['arrival']
+            print(f"{pilot['callsign']} - {pilot['name']}")
+            print(f"Departure - Arrival: {departure} - {arrival}")
+            if flight_rule == 'I':
+                print('Flight Rule: IFR')
+            elif flight_rule == 'V':
+                print('Flight Rule: VFR')
+            print(f'Airplane: {airplane}')
+            print(f'Route: {route}')
 
 
 ask_for_options()
