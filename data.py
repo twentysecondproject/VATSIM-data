@@ -66,6 +66,7 @@ def get_user_data():
     i3 = y['i3']
     sup = y['sup']
     adm = y['adm']
+    pilot = y['pilot']
     atc = y['atc']
 
     if len(subdiv) - subdiv.count(' ') != 0:       
@@ -109,6 +110,7 @@ def get_user_data():
             print(f'CTR Cert: {cert_list[ctr_cert]}')
             print(f'OCN Cert: {cert_list[ocn_cert]}')
             print(f'ATC: {atc}')
+            print(f'Pilot: {pilot}')
             print(f'S1: {s1}')
             print(f'S2: {s2}')
             print(f'S3: {s3}')
@@ -142,6 +144,7 @@ def get_user_data():
                 print(f'APP Cert: {cert_list[app_cert]}')
                 print(f'CTR Cert: {cert_list[ctr_cert]}')
                 print(f'ATC: {atc}')
+                print(f'Pilot: {pilot}')
                 print(f'S1: {s1}')
                 print(f'S2: {s2}')
                 print(f'S3: {s3}')
@@ -167,7 +170,8 @@ def get_user_data():
                     print(f'Subdivision: None')
                 else:
                     print(f'Subdivision: {sub}')
-                print(f'ATC Hours: {atc}')
+                print(f'ATC: {atc}')
+                print(f'Pilot: {pilot}')
                 print(f'S1: {s1}')
                 print(f'S2: {s2}')
                 print(f'S3: {s3}')
@@ -192,6 +196,7 @@ def get_user_data():
         else:
             print(f'Subdivision: {sub}')
         print(f'ATC: {atc}')
+        print(f'Pilot: {pilot}')
         print(f'S1: {s1}')
         print(f'S2: {s2}')
         print(f'S3: {s3}')
@@ -237,7 +242,7 @@ def get_pilot():
             airplane = flight_plan['aircraft_short']
             departure = flight_plan['departure']
             arrival = flight_plan['arrival']
-            print(f"{pilot['callsign']} - {pilot['name']}")
+            print(f"{pilot['callsign']} ({pilot['cid']}) - {pilot['name']}")
             print(f"Departure - Arrival: {departure} - {arrival}")
             if flight_rule == 'I':
                 print('Flight Rule: IFR')
@@ -245,6 +250,7 @@ def get_pilot():
                 print('Flight Rule: VFR')
             print(f'Airplane: {airplane}')
             print(f'Route: {route}')
+            ask_for_exit()
 
 print('Created with love by Filippo Genoni')
 ask_for_options()
