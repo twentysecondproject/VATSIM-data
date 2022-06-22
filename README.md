@@ -39,7 +39,7 @@ It is able to return:
 
 `Online controllers at an airport. (With ICAO (IATA if in the US) input)`
 
-`Get callsign information. (With callsign Input)`
+`Get online callsign information. (With callsign Input)`
 
 
 
