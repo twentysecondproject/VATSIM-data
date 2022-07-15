@@ -1,7 +1,5 @@
 # VATSIM-data
 
-You just need to have Python installed. Double Click on the data.py and follow the instructions.
-
 vACC/Division/Region website developers, if you have an online API to get more user data like certifications or other things (not personal like Email or Age) please share them, I would love to implement them!
 
 ![Screenshot 2022-06-20 151204](https://user-images.githubusercontent.com/89699543/174609333-9079ea74-1b89-46e2-813f-f38fb1877b0f.png)
